@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WoD Skill Config Insertion
 // @namespace    https://www.wannaexpresso.com
-// @version      0.2
+// @version      0.2.1
 // @description  Make it easier to insert actions in skill config.
 // @author       DotIN13
 // @include      https://*.wannaexpresso.com/wod/spiel/hero/skillconf*
