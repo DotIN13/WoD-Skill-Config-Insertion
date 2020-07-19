@@ -37,7 +37,7 @@ WodUiActionList.prototype.insertAction = function(action, index) {
             }
         })
 
-        // Make buttons Sticky
+        // Make buttons sticky
         var buttons = _this.list.buttonTd.element;
         var stickyButtons = document.createElement("div");
         while (buttons.childNodes.length) {
@@ -46,5 +46,8 @@ WodUiActionList.prototype.insertAction = function(action, index) {
         buttons.appendChild(stickyButtons);
         stickyButtons.setAttribute("style", "position: sticky; top: 0;");
         _this.list.buttonTd = stickyButtons;
+
+        // Make modBox sticky
+        _this.modBox.element.setAttribute("style", "width: 300px; padding-bottom: 10px; float: right; position: sticky; top: 0;");
     })
 })();
