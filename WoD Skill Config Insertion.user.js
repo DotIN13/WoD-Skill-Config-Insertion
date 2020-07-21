@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WoD Skill Config Insertion
 // @namespace    https://www.wannaexpresso.com
-// @version      0.2.1
+// @version      0.3
 // @description  Make it easier to insert actions in skill config.
 // @author       DotIN13
 // @include      https://*.wannaexpresso.com/wod/spiel/hero/skillconf*
@@ -24,7 +24,12 @@ WodUiActionList.prototype.insertAction = function(action, index) {
     ["preroundActionList", "roundActionList"].forEach(el => {
         var _this = THE_ORDERS.dungeon.level[el];
 
-        _this.list.addButton(new WodUiImage('button-copy.png', 24, 24, "插入"), function() {
+        // Add a text button using native JavaScript to distinguish from the existing copy button
+        var insertButton = document.createElement("button");
+        insertButton.innerHTML = "插";
+        insertButton.setAttribute("style", "color: white; background-color: #191919; width: 24px; height: 24px; padding: 0; text-align: center; font-weight: bold;");
+        insertButton.addEventListener("click", function(e) {
+            e.preventDefault();
             var src = _this.getSelectedAction();
 
             if (typeof src != undefined) {
@@ -35,7 +40,22 @@ WodUiActionList.prototype.insertAction = function(action, index) {
                 _this.rebuildModel();
                 _this.list.setSelectedIndex( _this.list.getSelectedIndex()+1 );
             }
-        })
+        });
+
+        _this.list.buttonTd.element.appendChild(insertButton);
+
+        /*_this.list.addButton(new WodUiImage('button-copy.png', 24, 24, "插入"), function() {
+            var src = _this.getSelectedAction();
+
+            if (typeof src != undefined) {
+                var dst = new WodAction();
+
+                dst.copyFrom(src);
+                _this.insertAction(dst, _this.list.getSelectedIndex());
+                _this.rebuildModel();
+                _this.list.setSelectedIndex( _this.list.getSelectedIndex()+1 );
+            }
+        })*/
 
         // Make buttons sticky
         var buttons = _this.list.buttonTd.element;
